@@ -1,7 +1,10 @@
 const bacnet = require('node-bacnet');
 
 // Initialize BACStack
-const bacnetDevice = new bacnet({ apduTimeout: 6000 });
+const bacnetDevice = new bacnet({
+    port: 47808, // Use BAC0 as communication port
+    apduTimeout: 6000 // Wait twice as long for response
+});
 
 // Discover Devices
 bacnetDevice.on('iAm', (device) => {
