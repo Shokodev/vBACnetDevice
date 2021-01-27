@@ -9,11 +9,12 @@ const bacnetDevice = new bacnet({
 
 // Discover Devices
 bacnetDevice.on('iAm', (device) => {
-    logger.info('address: ', device.address);
-    logger.info('deviceId: ', device.deviceId);
-    logger.info('maxApdu: ', device.maxApdu);
-    logger.info('segmentation: ', device.segmentation);
-    logger.info('vendorId: ', device.vendorId);
+    logger.info('Found a device!!');
+    logger.info('address: ' + device.header.sender.address);
+    logger.info('deviceId: ' + device.payload.deviceId);
+    logger.info('maxApdu: ' + device.payload.maxApdu);
+    logger.info('segmentation: ' + device.payload.segmentation);
+    logger.info('vendorId: ' + device.payload.vendorId);
 });
 
 // emitted on errors
@@ -21,8 +22,6 @@ bacnetDevice.on('error', (err) => {
     logger.error(err);
     bacnetDevice.close();
 });
-
-bacnetDevice.createObject()
 
 module.exports = {
     bacnetDevice

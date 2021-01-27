@@ -8,14 +8,12 @@
 
   const middlewares = require('./middlewares');
   const app = express();
-
+  bacnetDevice.whoIs();
   app.use(morgan('dev'));
   app.use(helmet());
   app.use(cors());
   app.use(express.json());
   console.log("Start BACnet client");
-  bacnetDevice.whoIs();
-  console.log();
 
   app.get('/', (req, res) => {
       logger.info("GET /")
